@@ -1,4 +1,8 @@
 Elections::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/contact"
+
   get "home/index"
 
   # The priority is based upon order of creation:
