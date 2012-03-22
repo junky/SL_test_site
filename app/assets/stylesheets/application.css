@@ -11,8 +11,3 @@
  *= require_self
  *= require_tree .
 */
-
-.div_tmp {
-  border: solid 1px red;
-  height: 100%;
-}
