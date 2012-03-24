@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def contact
   end
+
+  def election_distract
+  end
 end
