@@ -47,9 +47,9 @@
           <a class="brand" href="/">Выборы.dp.ua</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="/">Главная</a></li>
-              <li><a href="/pages/election_distract">Избирательные округа</a></li>
-              <li><a href="/pages/contact">Контакты</a></li>
+              <li <%= raw @home_class %>><a href="/">Главная</a></li>
+              <li <%= raw @distr_class %>><a href="/pages/election_distract">Избирательные округа</a></li>
+              <li <%= raw @contact_class %>><a href="/pages/contact">Контакты</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
