@@ -1,4 +1,6 @@
 Elections::Application.routes.draw do
+  resources :contacts
+
   get "pages/home"
   get "pages/contact"
   get "pages/election_distract"
