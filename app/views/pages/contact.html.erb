@@ -1,1 +1,11 @@
-Contact
+
+<%= form_tag({:controller => "pages", :action => "contact"}) do %>
+  <%= label_tag(:name, "Имя :") %>
+  <%= text_field_tag(:name) %>
+  <%= label_tag(:email, "Email :") %>
+  <%= text_field_tag(:email) %>
+  <%= label_tag(:text, "Текст сообщения :") %>
+  <%= text_area_tag(:text, "", {:rows => "5"}) %>
+  <br/>
+  <%= submit_tag("Отправить") %>
+<% end %>
