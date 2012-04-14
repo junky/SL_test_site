@@ -1,9 +1,10 @@
 Elections::Application.routes.draw do
   resources :contacts
 
-  get "pages/home"
-  get "pages/contact"
-  get "pages/election_distract"
+  match 'home' => 'pages#home'
+  match 'contact' => 'pages#contact'
+  match 'election_distract' => 'pages#election_distract'
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
