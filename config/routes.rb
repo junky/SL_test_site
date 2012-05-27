@@ -5,7 +5,7 @@ Elections::Application.routes.draw do
   match 'contact' => 'pages#contact'
   match 'election_distract' => 'pages#election_distract'
   match 'jsonp' => 'jsonp#jsonp'
-  
+ 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

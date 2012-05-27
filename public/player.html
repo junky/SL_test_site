@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Video Player</title>
+	<link rel="stylesheet" type="text/css" href="main.css" media="screen" />
+	<script src="player.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="main_projects_div">
+		<div class="project_list_header">
+			<div id="project_list_title" class="project_list_title"></div>
+		</div>
+		<div class="project_list_divider"></div>
+		<div id="project_list_container" class="project_list_container">
+		</div>
+	</div> 
+	<div id="main_player_div"> 
+		<div id="header">
+			<div id="main_player_title">Project Title</div>
+			<div id="header_right" onclick="setProjectsListVisible();">
+				<div id="back_txt">BACK TO PROGRAM</div> 
+				<div id="back_img"><img alt="back" src="back_arrow.png"></img></div>
+			</div>
+		</div>
+	
+		<table style="width:100%; "">
+			<tr>
+			<td style="vertical-align:top; width:40%;">
+				<video id="player" controls="controls" style="width:100%; ">
+					<!--  <source src="CarlSchoonover_2012U-320k.mp4"/> 
+					<source src="http://video.ted.com/talk/podcast/2012U/Rlogo/RennyGleeson_2012U.mp4"/> -->
+		 				Your browser does not support the video tag.
+		  		</video>
+		  		<div id="buttons" >
+		  			<img id="index_button" alt="Index" onclick="setIndexDivVisible();" src="index.png"/> 
+		  			<img id="slides_button" alt="Slides" onclick="setSlidesDivVisible();" src="slides.png"/>
+		  		</div>
+			  	<div id="index">
+				</div>
+		  		<div id="slides">
+				</div>
+			</td>
+			<td style="width:60%;vertical-align:top;">
+			  	<img id="slide_img" alt="" src="" style="width:100%;">
+			  	<br/>
+			  	<div style="display:none;"><span id="curtime">0:00</span> / <span id="duration">0:00</span></div>
+			</td>
+			</tr>
+		
+		</table>
+	</div>
+	<div id="trace_div">
+	</div>
+</body>
+
+<script type="text/javascript">
+	var video = document.getElementById("player");
+	var img = document.getElementById("slide_img");
+	var duration = document.getElementById("duration");
+	var curtime = document.getElementById("curtime");
+
+	var index = document.getElementById("index");
+	var slides = document.getElementById("slides");
+
+	var main_div = document.getElementById("main_player_div");
+	var buttons = document.getElementById("buttons");
+	
+	var index_height = '0px';
+	
+	window.addEventListener('load',function(){
+		index_height = (main_div.clientHeight - 35 - video.clientHeight - buttons.clientHeight - 20) + 'px';
+		index.style.height = index_height;
+		});
+	
+	
+	function setIndexDivVisible()
+	{
+		index.style.display = "block";
+		slides.style.display = "none";
+		index.style.height = index_height;
+	}
+
+	function setSlidesDivVisible()
+	{
+		slides.style.display = "block";
+		index.style.display = "none";
+		slides.style.height = index_height;
+	}
+	
+	window.setInterval(function(t){
+		  if (video.readyState > 0) {
+		    var vid_duration = Math.round(video.duration);
+		    duration.firstChild.nodeValue = vid_duration;
+			index_height = (main_div.clientHeight - 35 - video.clientHeight - buttons.clientHeight - 20) + 'px';
+			index.style.height = index_height;
+			slides.style.height = index_height;
+		    clearInterval(t);
+		  }
+		},250);
+	
+	InitVars();	
+	GetProjectsMetadata();
+</script>
+</html>
