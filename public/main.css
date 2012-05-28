@@ -4,8 +4,8 @@
 #main_projects_div { 
 	border: solid 1px grey;
 	position:absolute;
- 	top:200px;
- 	left:300px;
+ 	top:2px;
+ 	left:2px;
  	width:1036px;
 	height: 564px;
 }
@@ -66,8 +66,8 @@
 #main_player_div { 
 	border: solid 1px grey;
 	position:absolute;
- 	top:200px;
- 	left:300px;
+ 	top:2px;
+ 	left:2px;
  	width:1036px;
 	height: 564px;
 	display: none; 

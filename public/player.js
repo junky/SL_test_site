@@ -253,7 +253,8 @@ function GetVideoMetadata()
 function OnRecieveVideoMetadata(response)
 {
 	var video_metadata = eval('(' + response + ')');
-	video_player.src = "http://" + site_domain + "/content/"+ customer_id +"/"+ author_id + "/"+ project_id +"/" + video_metadata[0].data.filename + '.flv';
+//	+ video_metadata[0].data.filename +
+	video_player.src = "http://" + site_domain + "/content/"+ customer_id +"/"+ author_id + "/"+ project_id +"/index.m3u8";
 }
 
 function GetSlidesMetadata()
