@@ -29,7 +29,7 @@ function InitVars()
 		video_player = document.getElementById("player");
 		index_div = document.getElementById("index");
 		slides_div = document.getElementById("slides");
-		img = document.getElementById("slide_img");
+		img = document.getElementById("big_slide_img");
 		project_list_title = document.getElementById("project_list_title");
 		project_list_container = document.getElementById("project_list_container");
 		main_projects_div = document.getElementById("main_projects_div");
@@ -48,22 +48,6 @@ function ConvertInt2TimeStr(time_int)
 	if(mins < 10) mins = "0" + mins;
 	if(secs < 10) secs = "0" + secs;
 	return mins + ":" + secs;
-}
-
-function SetIndexSlidesContent()
-{
-	if(slides_metadata!=null) {
-		var i=0;
-		for (; i < slides_metadata.length; i++) {
-			var title = slides_metadata[i].data.title;
-			var time_stamp = ConvertInt2TimeStr(slides_metadata[i].startPos);
-			var img_src = GetProjectUrl() + slides_metadata[i].data.thumb + "_" +slides_metadata[i].data.frame + ".png";
-			if(title) {
-				index_div.innerHTML += GetIndexFrameDiv(i, time_stamp, title);
-				slides_div.innerHTML += GetSlidesFrameDiv(i, time_stamp, title, img_src);
-			}
-		}
-	}
 }
 
 function ClearIndexSlidesContent()
@@ -94,8 +78,17 @@ function GetSlidesFrameDiv(index, time_stamp, title_str, img_src)
 function onSlideClick(index)
 {
 	if(slides_metadata!=null && index < slides_metadata.length) {
-		video_player.currentTime = Math.floor(slides_metadata[index].startPos / 10);
-		video_player.play();
+		try {
+			if(video_player.readyState >= 2) {
+				video_player.currentTime = Math.floor(slides_metadata[index].startPos / 10);
+				video_player.play();
+			}
+		}
+		catch(e) {
+			console.log("onSlideClick video exception.");
+			console.log(e);
+		} 
+		
 		changeImage(index);
 	}
 }
@@ -124,6 +117,7 @@ function onVideoPlayer_TimeUpdate()
 function changeImage(index)
 {
 	last_slide_index = index;
+	img.style.visibility = "visible"; 
 	img.src = GetProjectUrl() + slides_metadata[index].data.thumb + "_" +slides_metadata[index].data.frame + ".png";
 	setAll_index_frames_inactive();
 	set_active_frame(index);
@@ -213,12 +207,19 @@ function onProjectClick(index, customerId, authorId, projectId)
 	project_id = projectId;
 	
 	main_player_title.innerHTML = projects_metadata[0].projects[index].title;
-	video_player.poster = GetProjectUrl() + "simvid_1.jpg";
-	
-	GetVideoMetadata();
+
+	try {
+		video_player.poster = GetProjectUrl() + "simvid_1.jpg";
+		video_player.addEventListener('timeupdate', onVideoPlayer_TimeUpdate, false);
+		video_player.src = "http://" + site_domain + "/content/"+ customer_id +"/"+ author_id + "/"+ project_id +"/index.m3u8";
+	} 
+	catch(e) {
+		console.log("onProjectClick video exception.");
+		console.log(e);
+	} 
+
 	GetSlidesMetadata();
 	setPlayerVisible();
-	video_player.addEventListener('timeupdate', onVideoPlayer_TimeUpdate, false);
 }
 
 function GetVideoMetadataUrl()
@@ -242,21 +243,6 @@ function GetProjectUrl()
 	return "http://" + site_domain + "/content/"+ customer_id +"/"+ author_id + "/"+ project_id +"/";
 }
 
-function GetVideoMetadata()
-{
-    var script = document.createElement('script');
-    script.setAttribute('src', GetVideoMetadataUrl());
-    script.setAttribute('type', 'text/javascript');
-    document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-function OnRecieveVideoMetadata(response)
-{
-	var video_metadata = eval('(' + response + ')');
-//	+ video_metadata[0].data.filename +
-	video_player.src = "http://" + site_domain + "/content/"+ customer_id +"/"+ author_id + "/"+ project_id +"/index.m3u8";
-}
-
 function GetSlidesMetadata()
 {
     var script = document.createElement('script');
@@ -268,17 +254,60 @@ function GetSlidesMetadata()
 function OnRecieveSlidesMetadata(response)
 {
 	slides_metadata = eval('(' + response + ')');
+	SetFirstSlide();
 	SetIndexSlidesContent();
 }
 
-function setProjectsListVisible()
+function SetFirstSlide() 
+{
+	var index = 0; // First slide index
+	if(slides_metadata!=null && slides_metadata.length > 0 && slides_metadata[index].startPos == 0) {
+		img.style.visibility = "visible"; 
+		img.src = GetProjectUrl() + slides_metadata[index].data.thumb + "_" +slides_metadata[index].data.frame + ".png";
+	}	
+}
+
+function SetIndexSlidesContent()
+{
+	if(slides_metadata!=null) {
+		var i=0;
+		for (; i < slides_metadata.length; i++) {
+			var title = slides_metadata[i].data.title;
+			var time_stamp = ConvertInt2TimeStr(slides_metadata[i].startPos);
+			var img_src = GetProjectUrl() + slides_metadata[i].data.thumb + "_" +slides_metadata[i].data.frame + ".png";
+			if(title) {
+				index_div.innerHTML += GetIndexFrameDiv(i, time_stamp, title);
+				slides_div.innerHTML += GetSlidesFrameDiv(i, time_stamp, title, img_src);
+			}
+		}
+	}
+}
+
+function onBackClick() // setProjectsListVisible
 {
 	ClearIndexSlidesContent();
-	video_player.removeEventListener('timeupdate', onVideoPlayer_TimeUpdate, false); 
-	video_player.pause();
-	video_player.currentTime = 0;
-	video_player.poster = "";
-	img.src="";
+	img.style.visibility = "hidden";
+	
+	try {
+		video_player.removeEventListener('timeupdate', onVideoPlayer_TimeUpdate, false); 
+		video_player.pause();
+	} 
+	catch(e) {
+		console.log("onBackClick1 video exception.");
+		console.log(e);
+	} 
+	
+	try {
+		if(video_player.readyState >= 2) {
+			video_player.currentTime = 0;
+		}
+		video_player.poster = "pixel.png";
+		video_player.src="";
+	} 
+	catch(e) {
+		console.log("onBackClick2 video exception.");
+		console.log(e);
+	} 
 	
 	last_slide_index = -1;
 	main_projects_div.style.display = "block";

@@ -18,7 +18,7 @@
 	<div id="main_player_div"> 
 		<div id="header">
 			<div id="main_player_title">Project Title</div>
-			<div id="header_right" onclick="setProjectsListVisible();">
+			<div id="header_right" onclick="onBackClick();">
 				<div id="back_txt">BACK TO PROGRAM</div> 
 				<div id="back_img"><img alt="back" src="back_arrow.png"></img></div>
 			</div>
@@ -28,8 +28,6 @@
 			<tr>
 			<td style="vertical-align:top; width:40%;">
 				<video id="player" controls="controls" style="width:100%; ">
-					<!--  <source src="CarlSchoonover_2012U-320k.mp4"/> 
-					<source src="http://video.ted.com/talk/podcast/2012U/Rlogo/RennyGleeson_2012U.mp4"/> -->
 		 				Your browser does not support the video tag.
 		  		</video>
 		  		<div id="buttons" >
@@ -42,9 +40,7 @@
 				</div>
 			</td>
 			<td style="width:60%;vertical-align:top;">
-			  	<img id="slide_img" alt="" src="" style="width:100%;">
-			  	<br/>
-			  	<div style="display:none;"><span id="curtime">0:00</span> / <span id="duration">0:00</span></div>
+			  	<img id="big_slide_img" src="" style="width:100%; visibility: hidden;">
 			</td>
 			</tr>
 		
@@ -56,15 +52,11 @@
 
 <script type="text/javascript">
 	var video = document.getElementById("player");
-	var img = document.getElementById("slide_img");
-	var duration = document.getElementById("duration");
-	var curtime = document.getElementById("curtime");
 
 	var index = document.getElementById("index");
 	var slides = document.getElementById("slides");
 
 	var main_div = document.getElementById("main_player_div");
-	var buttons = document.getElementById("buttons");
 	
 	var index_height = '0px';
 	
@@ -90,8 +82,6 @@
 	
 	window.setInterval(function(t){
 		  if (video.readyState > 0) {
-		    var vid_duration = Math.round(video.duration);
-		    duration.firstChild.nodeValue = vid_duration;
 			index_height = (main_div.clientHeight - 35 - video.clientHeight - buttons.clientHeight - 20) + 'px';
 			index.style.height = index_height;
 			slides.style.height = index_height;

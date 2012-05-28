@@ -3,6 +3,11 @@
 class PagesController < ApplicationController
   def home
     @home_class = 'class="active"'
+    
+    if request.host == 'strong-winter-8770.herokuapp.com' 
+      redirect_to "/player"
+    end
+    
   end
 
   def contact
