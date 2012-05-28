@@ -58,7 +58,7 @@ function ClearIndexSlidesContent()
 
 function GetIndexFrameDiv(index, time_stamp, title_str)
 {
-	var div = "<div id=\"index_frame_#index\" class=\"index_title_container inactive_index_frame\" onclick=\"onSlideClick(#index);\"><div class=\"index_time\">#time_stamp</div>#title_str</div>";
+	var div = "<div id=\"index_frame_#index\" class=\"index_title_container inactive_index_frame\" onclick=\"onSlideClick(#index);\"><div class=\"index_time\">#time_stamp</div><div class=\"index_title\">#title_str</div></div>";
 	div = div.replace(/#index/g, index);
 	div = div.replace("#time_stamp", time_stamp);
 	div = div.replace("#title_str", title_str);
