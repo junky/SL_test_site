@@ -1,13 +1,19 @@
 @CHARSET "UTF-8";
 
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
 
 #main_projects_div { 
 	border: solid 1px grey;
-	position:absolute;
- 	top:2px;
- 	left:2px;
- 	width:1036px;
-	height: 564px;
+ 	width:100%;
+	height: 100%;
 }
 .project_list_header {
 	background-color: #005CAA;
@@ -29,7 +35,7 @@
 .project_list_container {
 	overflow: auto;
 	padding: 2px;
-	height: 510px;
+	height: 10px;
 }
 
 .project_div {
@@ -66,10 +72,8 @@
 #main_player_div { 
 	border: solid 1px grey;
 	position:absolute;
- 	top:2px;
- 	left:2px;
- 	width:1036px;
-	height: 564px;
+ 	width:100%;
+	height: 100%;
 	display: none; 
 }
 #header {

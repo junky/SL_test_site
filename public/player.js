@@ -174,6 +174,7 @@ function OnRecieveProjectsMetadata(response)
 
 function SetProjectsListDivContent()
 {
+	ResizeProjectList();	
 	if(projects_metadata!=null) {
 		var i=0;
 		var projects = projects_metadata[0].projects;
@@ -319,3 +320,8 @@ function setPlayerVisible()
 	main_projects_div.style.display = "none";
 	main_player_div.style.display = "block";
 }
+function ResizeProjectList() {
+	project_list_container.style.height = (main_projects_div.clientHeight - 50) + 'px';
+}
+
+window.onresize = ResizeProjectList;
