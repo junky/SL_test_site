@@ -352,6 +352,8 @@ function onBackClick() // setProjectsListVisible
 	} 
 	
 	last_slide_index = -1;
+	
+	ResizeProjectList();
 }
 
 function setPlayerVisible()
@@ -359,6 +361,7 @@ function setPlayerVisible()
 	main_projects_div.style.display = "none";
 	main_player_div.style.display = "block";
 }
+
 function ResizeProjectList() {
 	if(project_list_container) {
 		project_list_container.style.height = (main_projects_div.clientHeight - 50) + 'px';
@@ -369,14 +372,14 @@ function setIndexDivVisible()
 {
 	index.style.display = "block";
 	slides.style.display = "none";
-	index.style.height = index_height;
+	UpdateDivSizes();
 }
 
 function setSlidesDivVisible()
 {
 	slides_div.style.display = "block";
 	index.style.display = "none";
-	slides_div.style.height = index_height;
+	UpdateDivSizes();
 }
 
 function OnWindowResize()
@@ -402,4 +405,4 @@ window.setInterval(function(t){
 	},250);
 
 window.addEventListener('load', UpdateDivSizes);
-window.onresize = OnWindowResize();
+window.addEventListener('resize', OnWindowResize);
