@@ -25,6 +25,8 @@ var author_id = 0;
 var project_id = 0;
 var project_title = "";
 
+var cache = {};
+
 function InitVars()
 {
 	if(vars_inited == false) 
@@ -252,14 +254,20 @@ function GetProjectUrl()
 
 function GetSlidesMetadata()
 {
-    var script = document.createElement('script');
-    script.setAttribute('src', GetSlidesMetadataUrl());
-    script.setAttribute('type', 'text/javascript');
-    document.getElementsByTagName('head')[0].appendChild(script);
+	if(cache[project_id]) {
+		OnRecieveSlidesMetadata(cache[project_id]);
+	} else {
+		var script = document.createElement('script');
+		script.setAttribute('src', GetSlidesMetadataUrl());
+		script.setAttribute('type', 'text/javascript');
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
 }
 
 function OnRecieveSlidesMetadata(response)
 {
+	cache[project_id] = response;
+	
 	slides_metadata = eval('(' + response + ')');
 	if(slides_metadata!=null && slides_metadata.length == 0) {
 		SetSinglePlayerMode();
