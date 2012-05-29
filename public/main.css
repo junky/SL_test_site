@@ -112,7 +112,7 @@ html, body {
 }
 
 #back_img {
-	position: relative;
+	position: 	;
 	width: 30px;
 	margin-top: 4px;
 	margin-left: 65px;
@@ -223,4 +223,32 @@ html, body {
 
 .slides_title {
 	margin-left: 155px;
+}
+
+.video_class {
+	width: 100%;
+}
+
+.left_column {
+	vertical-align:top; 
+	width:40%;
+}
+
+.left_column_single_player {
+	vertical-align:top; 
+	width:100%;
+	padding-left: 1px;
+}
+
+.right_column {
+	vertical-align:top; 
+	width:60%;
+}
+
+.right_column_single_player {
+	width:0%;
+}
+
+#buttons {
+	display: none;
 }

@@ -1,9 +1,10 @@
 var vars_inited = false;
 var video_player = null;
+var left_column = null;
+var right_column = null;
+var buttons = null;
 var index_div = null;
 var slides_div = null;
-var slides_metadata= null;
-var projects_metadata= null;
 var img = null;
 var project_list_title = null;
 var project_list_container = null;
@@ -11,6 +12,8 @@ var main_projects_div = null;
 var main_player_div = null;
 var main_player_title = null;
 
+var slides_metadata= null;
+var projects_metadata= null;
 
 var last_slide_index = -1;
 var last_video_time = 0;
@@ -27,6 +30,9 @@ function InitVars()
 	if(vars_inited == false) 
 	{
 		video_player = document.getElementById("player");
+		left_column = document.getElementById("left_column");
+		right_column = document.getElementById("right_column");
+		buttons = document.getElementById("buttons");
 		index_div = document.getElementById("index");
 		slides_div = document.getElementById("slides");
 		img = document.getElementById("big_slide_img");
@@ -255,8 +261,28 @@ function GetSlidesMetadata()
 function OnRecieveSlidesMetadata(response)
 {
 	slides_metadata = eval('(' + response + ')');
-	SetFirstSlide();
-	SetIndexSlidesContent();
+	if(slides_metadata!=null && slides_metadata.length == 0) {
+		SetSinglePlayerMode();
+	} else {
+		SetFirstSlide();
+		SetIndexSlidesContent();
+	}
+}
+
+function SetSinglePlayerMode()
+{
+	left_column.className = "left_column_single_player";
+	right_column.className = "right_column_single_player";
+	index.style.display = "none";
+	slides.style.display = "none";
+}
+
+function RevertSinglePlayerMode()
+{
+	left_column.className = "left_column";
+	right_column.className = "right_column";
+	index.style.display = "block";
+	slides.style.display = "none";
 }
 
 function SetFirstSlide() 
@@ -270,6 +296,7 @@ function SetFirstSlide()
 
 function SetIndexSlidesContent()
 {
+	buttons.style.display = "block";
 	if(slides_metadata!=null) {
 		var i=0;
 		for (; i < slides_metadata.length; i++) {
@@ -286,8 +313,13 @@ function SetIndexSlidesContent()
 
 function onBackClick() // setProjectsListVisible
 {
+	main_projects_div.style.display = "block";
+	main_player_div.style.display = "none";
+	
+	RevertSinglePlayerMode();
 	ClearIndexSlidesContent();
 	img.style.visibility = "hidden";
+	buttons.style.display = "none";
 	
 	try {
 		video_player.removeEventListener('timeupdate', onVideoPlayer_TimeUpdate, false); 
@@ -311,8 +343,6 @@ function onBackClick() // setProjectsListVisible
 	} 
 	
 	last_slide_index = -1;
-	main_projects_div.style.display = "block";
-	main_player_div.style.display = "none";
 }
 
 function setPlayerVisible()
@@ -323,5 +353,32 @@ function setPlayerVisible()
 function ResizeProjectList() {
 	project_list_container.style.height = (main_projects_div.clientHeight - 50) + 'px';
 }
+
+function setIndexDivVisible()
+{
+	index.style.display = "block";
+	slides.style.display = "none";
+	index.style.height = index_height;
+}
+
+function setSlidesDivVisible()
+{
+	slides_div.style.display = "block";
+	index.style.display = "none";
+	slides_div.style.height = index_height;
+}
+
+window.addEventListener('load',function(){
+	index_div.style.height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
+	});
+
+window.setInterval(function(t){
+	  if (video_player.readyState > 0) {
+		var index_height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
+		index_div.style.height = index_height;
+		slides_div.style.height = index_height;
+	    clearInterval(t);
+	  }
+	},250);
 
 window.onresize = ResizeProjectList;
