@@ -97,15 +97,28 @@ html, body {
 
 #header_right {
 	float:right;
-	width: 100px;
+	width: 120px;
 	vertical-align: middle;
 	cursor: pointer;
 }
+
+#back_div {
+	position: absolute;
+	height: 22px;
+	margin-top: 6px;
+	font-family: Helvetica!important;
+	font-size: 12px;
+	line-height: 1.0em;
+	border-left: 1px solid #0064AE;
+	border-right: 1px solid #00447F;
+}
+
 
 #back_txt {
 	position: absolute;
 	width: 70px;
 	margin-top: 4px;
+	margin-left: 20px;
 	font-family: Helvetica!important;
 	font-size: 12px;
 	line-height: 1.0em;
@@ -115,7 +128,7 @@ html, body {
 	position: 	;
 	width: 30px;
 	margin-top: 4px;
-	margin-left: 65px;
+	margin-left: 85px;
 }
 
 #index {
