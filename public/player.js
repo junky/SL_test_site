@@ -376,17 +376,25 @@ function setSlidesDivVisible()
 	slides_div.style.height = index_height;
 }
 
-window.addEventListener('load',function(){
-	index_div.style.height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
-	});
+function OnWindowResize()
+{
+	ResizeProjectList();
+	UpdateDivSizes();
+}
+
+function UpdateDivSizes()
+{
+	var index_height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
+	index_div.style.height = index_height;
+	slides_div.style.height = index_height;
+}
 
 window.setInterval(function(t){
 	  if (video_player.readyState > 0) {
-		var index_height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
-		index_div.style.height = index_height;
-		slides_div.style.height = index_height;
-	    clearInterval(t);
+		  UpdateDivSizes();
+		  clearInterval(t);
 	  }
 	},250);
 
-window.onresize = ResizeProjectList;
+window.addEventListener('load', UpdateDivSizes);
+window.onresize = OnWindowResize();
