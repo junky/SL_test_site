@@ -17,6 +17,7 @@ var projects_metadata= null;
 
 var last_slide_index = -1;
 var last_video_time = 0;
+var single_player_mode = 0;
 
 var site_domain = "dev.simplex.tv";
 var customer_id = 333;
@@ -279,18 +280,24 @@ function OnRecieveSlidesMetadata(response)
 
 function SetSinglePlayerMode()
 {
+	single_player_mode = 1;
+	
 	left_column.className = "left_column_single_player";
 	right_column.className = "right_column_single_player";
 	index.style.display = "none";
 	slides.style.display = "none";
+	UpdateVideoHeight();
 }
 
 function RevertSinglePlayerMode()
 {
+	single_player_mode = 0;
+	
 	left_column.className = "left_column";
 	right_column.className = "right_column";
 	index.style.display = "block";
 	slides.style.display = "none";
+	video_player.style.height  = '';
 }
 
 function SetFirstSlide() 
@@ -390,6 +397,7 @@ function OnWindowResize()
 
 function UpdateDivSizes()
 {
+	UpdateVideoHeight();
 	if(main_player_div && video_player && buttons && index_div && slides_div) {
 		var index_height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
 		index_div.style.height = index_height;
@@ -397,12 +405,26 @@ function UpdateDivSizes()
 	}
 }
 
-window.setInterval(function(t){
+function UpdateVideoHeight()
+{
+	if(single_player_mode==1 && main_player_div && video_player) {
+		if (video_player.clientHeight >= main_player_div.clientHeight - 40 ) {
+			video_player.style.height = (main_player_div.clientHeight - 40) + 'px';
+		} 
+		else {
+			video_player.style.height  = '';
+		}
+	}
+}
+
+
+var timer = window.setInterval(function(){
 	  if (video_player.readyState > 0) {
 		  UpdateDivSizes();
-		  clearInterval(t);
+		  clearInterval(timer);
 	  }
 	},250);
+
 
 window.addEventListener('load', UpdateDivSizes);
 window.addEventListener('resize', OnWindowResize);
