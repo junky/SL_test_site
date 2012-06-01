@@ -278,6 +278,7 @@ function OnRecieveSlidesMetadata(response)
 	}
 }
 
+var single_player_mode_timer = 0;
 function SetSinglePlayerMode()
 {
 	single_player_mode = 1;
@@ -286,7 +287,11 @@ function SetSinglePlayerMode()
 	right_column.className = "right_column_single_player";
 	index.style.display = "none";
 	slides.style.display = "none";
-	UpdateVideoHeight();
+	
+	single_player_mode_timer = window.setInterval(function(){
+			UpdateVideoHeight();
+			clearInterval(single_player_mode_timer);
+		}, 1);
 }
 
 function RevertSinglePlayerMode()
@@ -309,9 +314,9 @@ function SetFirstSlide()
 	}	
 }
 
+var index_slides_content_timer = -1;
 function SetIndexSlidesContent()
 {
-	UpdateDivSizes();
 	buttons.style.display = "block";
 	if(slides_metadata!=null) {
 		var i=0;
@@ -325,6 +330,11 @@ function SetIndexSlidesContent()
 			}
 		}
 	}
+
+	index_slides_content_timer = window.setInterval(function(){
+		UpdateDivSizes();
+		clearInterval(index_slides_content_timer);
+	}, 1);
 }
 
 function onBackClick() // setProjectsListVisible
@@ -334,6 +344,7 @@ function onBackClick() // setProjectsListVisible
 	
 	RevertSinglePlayerMode();
 	ClearIndexSlidesContent();
+	stopSetPlayerVisibleTimer();
 	img.style.visibility = "hidden";
 	buttons.style.display = "none";
 	
@@ -363,10 +374,32 @@ function onBackClick() // setProjectsListVisible
 	ResizeProjectList();
 }
 
+var set_player_visible_timer = -1;
+function stopSetPlayerVisibleTimer()
+{
+	if(set_player_visible_timer != -1) {
+		clearInterval(set_player_visible_timer);
+		set_player_visible_timer = -1;
+	}
+}
+
+function runSetPlayerVisibleTimer()
+{
+	stopSetPlayerVisibleTimer();
+	set_player_visible_timer = window.setInterval(function(){
+		  UpdateDivSizes();
+		  if (video_player.readyState > 1) {
+			  stopSetPlayerVisibleTimer();
+		  }
+		}, 250);	
+}
+
 function setPlayerVisible()
 {
 	main_projects_div.style.display = "none";
 	main_player_div.style.display = "block";
+	
+	runSetPlayerVisibleTimer();
 }
 
 function ResizeProjectList() {
@@ -399,6 +432,9 @@ function UpdateDivSizes()
 {
 	UpdateVideoHeight();
 	if(main_player_div && video_player && buttons && index_div && slides_div) {
+		console.log("main_player_div: " + main_player_div.clientHeight);
+		console.log("video_player: " + video_player.clientHeight);
+		console.log("buttons: " + buttons.clientHeight);
 		var index_height = (main_player_div.clientHeight - 35 - video_player.clientHeight - buttons.clientHeight - 20) + 'px';
 		index_div.style.height = index_height;
 		slides_div.style.height = index_height;
@@ -416,15 +452,6 @@ function UpdateVideoHeight()
 		}
 	}
 }
-
-
-var timer = window.setInterval(function(){
-	  if (video_player.readyState > 0) {
-		  UpdateDivSizes();
-		  clearInterval(timer);
-	  }
-	},250);
-
 
 window.addEventListener('load', UpdateDivSizes);
 window.addEventListener('resize', OnWindowResize);
