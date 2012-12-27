@@ -7,10 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div>
+<%= link_to "Home", "/" %>
+<%= link_to "Settings", "/home/settings" %>
+</div>
 
 <%= yield %>
 
-<%= session[:locale] %>
+<div>
+  <%= session[:locale] %>
+</div>
 
 </body>
 </html>
