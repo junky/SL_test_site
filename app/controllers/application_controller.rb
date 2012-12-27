@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :set_cache_buster
+#  before_filter :set_cache_buster
   after_filter :add_header
   
   def set_cache_buster
