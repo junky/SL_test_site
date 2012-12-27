@@ -1,0 +1,6 @@
+<%= form_tag('/home/settings', :method => :post) do %>
+  <%= label_tag(:locale, "Locale:") %>
+  <%= text_field_tag(:locale, 'ru-RU') %>
+  <%= submit_tag("Apply") %>
+  
+<% end %>
