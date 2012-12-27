@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   end
 
   def settings
-    session[:locale] = params[:locale]
+    session[:locale] = params[:locale] if request.post?
   end
 end
