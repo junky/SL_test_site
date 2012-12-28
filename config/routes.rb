@@ -2,6 +2,7 @@ SLTestSite::Application.routes.draw do
   get "home/index"
   get "home/settings"
   post "home/settings"
+  get "home/autosearch"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

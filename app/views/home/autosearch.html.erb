@@ -1,0 +1,12 @@
+<%= form_tag('/home/autosearch', :method => :get) do %>
+  <%= label_tag(:search, "Search:") %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag("Search") %>
+  
+<% end %>
+
+<div>
+Search results:
+<p>
+<%= @results %>
+</div>
