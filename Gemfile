@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,7 +9,7 @@ group :development do
 	gem 'sqlite3'
 	
 	# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-	gem 'therubyracer'
+#	gem 'therubyracer'
 end
   
 group :production do
