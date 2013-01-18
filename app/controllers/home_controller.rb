@@ -10,4 +10,8 @@ class HomeController < ApplicationController
     @results = 'Nothing Found'
     @results = 'Cat found!' if params[:search] == 'cat'
   end
+
+  def redirect
+    redirect_to "http://www.somedomain.net"
+  end
 end
