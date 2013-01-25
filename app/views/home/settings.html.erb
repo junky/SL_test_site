@@ -1,6 +1,14 @@
-<%= form_tag('/home/settings', :method => :post) do %>
+<script>
+function onFormSubmit()
+{
+  
+  document.cookie = 'language_locale=' + document.getElementById('locale').value + ";path=/;";
+  document.getElementById("form_id").submit();
+}
+</script>
+
+<%= form_tag('/home/settings', :id => 'form_id', :method => :post) do %>
   <%= label_tag(:locale, "Locale:") %>
   <%= text_field_tag(:locale, 'ru-RU') %>
-  <%= submit_tag("Apply") %>
-  
+  <%= submit_tag "Apply", :type => "button", :onclick => "onFormSubmit();" %>
 <% end %>
