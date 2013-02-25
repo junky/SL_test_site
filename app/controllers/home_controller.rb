@@ -14,4 +14,7 @@ class HomeController < ApplicationController
   def redirect
     redirect_to "http://www.somedomain.net"
   end
+
+  def images
+  end
 end
