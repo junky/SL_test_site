@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   end
 
   def redirect
-    redirect_to "http://www.somedomain.net"
+    redirect_to params[:redirect_url] if not params[:redirect_url].nil? and not params[:redirect_url].empty? 
   end
 
   def images

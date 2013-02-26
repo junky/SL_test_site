@@ -1,0 +1,5 @@
+<%= form_tag('/home/redirect', :id => 'form_id', :method => :post) do %>
+  <%= label_tag(:redirect_url, "Redirect Url:") %>
+  <%= text_field_tag(:redirect_url, 'http://strong-winter-8770.herokuapp.ru/home/settings', :size => 75) %>
+  <%= submit_tag "GO!" %>
+<% end %>
