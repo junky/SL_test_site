@@ -17,6 +17,9 @@ class HomeController < ApplicationController
 
   def images
   end
+  
+  def swaps
+  end
 
   def javascript_files
     js_text = 'var txt="Hello World!";    document.write(txt.length);    var txt="ABCDEFGHIJKLMNOPQRSTUVWXYZ";    document.write(txt.length);'  
