@@ -6,6 +6,7 @@ SLTestSite::Application.routes.draw do
   get "home/redirect"
   post "home/redirect"
   get "home/images"
+  get "home/javascript_files"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
