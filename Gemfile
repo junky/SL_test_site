@@ -9,7 +9,7 @@ group :development do
 	gem 'sqlite3'
 	
 	# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-	gem 'therubyracer'
+#	gem 'therubyracer'
 end
   
 group :production do
@@ -26,6 +26,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails'  
   gem 'less-rails'
+  gem 'therubyracer'
 end
 
 gem 'jquery-rails'
