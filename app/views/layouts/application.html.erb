@@ -24,13 +24,13 @@
       <a class="brand" href="#">Smartling Test Site</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="active"><%= link_to "Home", "/" %></li>
-          <li><%= link_to "Settings", "/home/settings" %></li>
-          <li><%= link_to "Autosearch", "/home/autosearch" %></li>
-          <li><%= link_to "Redirect", "/home/redirect" %></li>
-          <li><%= link_to "Images", "/home/images" %></li>
-          <li><%= link_to "JavaScipt Files", "/home/javascript_files" %></li>
-          <li><%= link_to "Swaps", "/home/swaps" %></li>
+          <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", "/" %></li>
+          <li class="<%= 'active' if current_page?(home_settings_path) %>"><%= link_to "Settings", "/home/settings" %></li>
+          <li class="<%= 'active' if current_page?(home_autosearch_path) %>"><%= link_to "Autosearch", "/home/autosearch" %></li>
+          <li class="<%= 'active' if current_page?(home_redirect_path) %>"><%= link_to "Redirect", "/home/redirect" %></li>
+          <li class="<%= 'active' if current_page?(home_images_path) %>"><%= link_to "Images", "/home/images" %></li>
+          <li class="<%= 'active' if current_page?(home_javascript_files_path) %>"><%= link_to "JavaScipt Files", "/home/javascript_files" %></li>
+          <li class="<%= 'active' if current_page?(home_swaps_path) %>"><%= link_to "Swaps", home_swaps_path %></li>
         </ul>
       </div>
     </div>
