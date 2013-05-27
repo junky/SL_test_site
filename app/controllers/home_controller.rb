@@ -12,7 +12,9 @@ class HomeController < ApplicationController
   end
 
   def redirect
-    redirect_to params[:redirect_url] if not params[:redirect_url].nil? and not params[:redirect_url].empty? 
+    if not params[:redirect_url].nil? and not params[:redirect_url].empty?
+      redirect_to params[:redirect_url], :status => :moved_permanently
+    end
   end
 
   def images
