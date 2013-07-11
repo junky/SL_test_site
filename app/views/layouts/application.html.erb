@@ -44,10 +44,10 @@
       <b>Selected Locale:</b> <%= session[:locale] %>
     </div>
     <div class="span3">
-      <span class="SL_date"><%= DateTime.now.strftime("%e %B, %Y") %></span>
+      <span class="SL_date" sl_dtfmt="%e %B, %Y" sl_dtfmt_target="date_class"><%= DateTime.now.strftime("%e %B, %Y") %></span>
     </div>
     <div class="span3">
-      <span class="SL_date">9 April, 1984</span>
+      <span class="SL_date" sl_dtfmt="%e %B, %Y" sl_dtfmt_target="date_class">9 April, 1984</span>
     </div>
   </div>
 </div>
