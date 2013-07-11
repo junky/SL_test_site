@@ -9,6 +9,6 @@ function onFormSubmit()
 
 <%= form_tag('/home/settings', :id => 'form_id', :method => :post) do %>
   <%= label_tag(:locale, "Locale:") %>
-  <%= text_field_tag(:locale, 'ru-RU') %>
-  <%= submit_tag "Apply", :type => "button", :onclick => "onFormSubmit();" %>
+  <%= text_field_tag(:locale, 'ru-RU', :class => 'autosearch_input') %>
+  <%= submit_tag "Apply", :type => "button", :onclick => "onFormSubmit();", :translate=>'1', :class=>'btn btn-primary' %>
 <% end %>
