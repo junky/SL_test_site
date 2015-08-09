@@ -9,8 +9,8 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -31,6 +31,7 @@
           <li class="<%= 'active' if current_page?(home_images_path) %>"><%= link_to "Images", "/home/images" %></li>
           <li class="<%= 'active' if current_page?(home_javascript_files_path) %>"><%= link_to "JavaScipt Files", "/home/javascript_files" %></li>
           <li class="<%= 'active' if current_page?(home_swaps_path) %>"><%= link_to "Swaps", home_swaps_path %></li>
+          <li class="<%= 'active' if current_page?(home_plurals_path) %>"><%= link_to "Plurals", home_plurals_path %></li>
         </ul>
       </div>
     </div>

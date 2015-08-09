@@ -28,3 +28,4 @@ gem 'jquery-rails'
 gem 'sanitize'
 
 gem 'rails_12factor'
+gem 'russian'

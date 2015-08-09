@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="span4">
+    <h4>English 1</h4>
+    <% I18n.locale = "en" %>
+    <% for i in 0..15 do %>
+      <%=t :about_x_hours, :count => i %>
+      <br/>
+    <% end %>
+    <br/>
+    <br/>
+    en.yml
+    <br/>
+    <textarea rows="6">
+en:
+  about_x_hours:
+    one: 'about %{count} hour'
+    other: 'about %{count} hours'
+    </textarea>
+  </div>
+
+  <div class="span4">
+    <h4>English 2</h4>
+    <% I18n.locale = "en" %>
+    <% for i in 0..15 do %>
+      <%=t :about_x_hours_2, :count => i %>
+      <br/>
+    <% end %>
+    <br/>
+    <br/>
+    en.yml
+    <br/>
+    <textarea rows="6">
+en:
+  about_x_hours_2:
+    one: 'about one hour'
+    other: 'about %{count} hours'
+    </textarea>
+  </div>
+  <div class="span4">
+    <h4>Russian</h4>
+    <% I18n.locale = "ru" %>
+    <% for i in 0..15 do %>
+      <%=t :x_hours, :count => i %>
+      <br/>
+    <% end %>
+    <br/>
+    <br/>
+    ru.yml
+    <br/>
+    <textarea rows="6">
+ru:
+  x_hours:
+    one: '%{count} час'
+    few: '%{count} часа'
+    many: '%{count} часов'
+    </textarea>
+  </div>
+</div>

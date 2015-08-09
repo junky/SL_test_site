@@ -1,11 +1,8 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
-  about_x_hours:
-    one: 'about %{count} hour'
-    other: 'about %{count} hours'
-
-  about_x_hours_2:
-    one: 'about one hour'
-    other: 'about %{count} hours'
+ru:
+  x_hours:
+    one: '%{count} час'
+    few: '%{count} часа'
+    many: '%{count} часов'
